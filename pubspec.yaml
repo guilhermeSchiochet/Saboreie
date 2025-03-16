@@ -19,6 +19,7 @@ dependencies:
       ref: develop
   hooks_riverpod: ^2.5.2
   riverpod: ^2.5.1
+  lucide_icons: ^0.257.0
 
 dev_dependencies:
   flutter_lints: ^4.0.0

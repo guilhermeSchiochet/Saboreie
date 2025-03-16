@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saboreie/src/config/theme/app_theme.dart';
-import 'package:saboreie/src/presentation/view/home_page.view.dart';
+import 'package:saboreie/src/presentation/view/scaffold_main_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -8,9 +8,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomePageView(),
+      home: const ScaffoldMainScreen(),
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
+      theme: AppTheme.light,
     );
   }
 }

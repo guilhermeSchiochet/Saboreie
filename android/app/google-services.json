@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "362952111327",
+    "project_id": "saboreie",
+    "storage_bucket": "saboreie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362952111327:android:48afa049b9fa57c852e56a",
+        "android_client_info": {
+          "package_name": "saboreie.aplicationid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIguq1dLemPv9Dy3fpJs9MLOVNmRIUUDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
