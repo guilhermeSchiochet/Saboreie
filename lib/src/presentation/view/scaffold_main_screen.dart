@@ -22,11 +22,11 @@ class _ScaffoldMainScreenState extends State<ScaffoldMainScreen> {
   List<ButtonNavigationBarModel> icons = [
     ButtonNavigationBarModel(
       titile: 'Home',
-      icon: LucideIcons.landmark
+      icon: LucideIcons.home
     ),
     ButtonNavigationBarModel(
       titile: 'Notification',
-      icon: LucideIcons.ticket
+      icon: Icons.notifications_outlined
     ),
     ButtonNavigationBarModel(
       titile: 'Profile',

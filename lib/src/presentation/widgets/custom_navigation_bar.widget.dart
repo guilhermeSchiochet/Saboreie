@@ -7,7 +7,7 @@ class CustomNavigationBarWidget extends StatelessWidget {
   final Color backgroundColor;
   final void Function(int) onTabChange;
   final List<ButtonNavigationBarModel> navigationBarButtons;
-  
+
   const CustomNavigationBarWidget({
     required this.onTabChange,
     required this.backgroundColor,
@@ -15,7 +15,6 @@ class CustomNavigationBarWidget extends StatelessWidget {
     this.selectedIndex = 0,
     super.key,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +24,9 @@ class CustomNavigationBarWidget extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
           child: DecoratedBox(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(6),
@@ -69,7 +68,7 @@ class _Button extends StatelessWidget {
     required this.backgroundColor,
   });
 
-  static const _animationDuration = Duration(milliseconds: 200);
+  static const _animationDuration = Duration(milliseconds: 300);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +97,7 @@ class _Button extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: SizedBox(
-              height: 50, // Limitação da altura do botão
+              height: 35, // Limitação da altura do botão
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
