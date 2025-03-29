@@ -15,21 +15,21 @@ class ScaffoldMainScreen extends StatefulWidget {
 }
 
 class _ScaffoldMainScreenState extends State<ScaffoldMainScreen> {
-  PageController _pageController = PageController();
+  final _pageController = PageController();
 
   int _page = 0;
 
   List<ButtonNavigationBarModel> icons = [
     ButtonNavigationBarModel(
-      titile: 'Home',
+      title: 'Home',
       icon: LucideIcons.home
     ),
     ButtonNavigationBarModel(
-      titile: 'Notification',
-      icon: Icons.notifications_outlined
+      title: 'Search',
+      icon: Icons.search
     ),
     ButtonNavigationBarModel(
-      titile: 'Profile',
+      title: 'Profile',
       icon: LucideIcons.user
     ),
   ];
@@ -43,17 +43,24 @@ class _ScaffoldMainScreenState extends State<ScaffoldMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: List.generate(3, (index) =>  pages[index] ),
+        children: List.generate(3, (index) => Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+            left: 10,
+          ),
+          child: pages[index],
+        )),
       ),
       bottomNavigationBar: CustomNavigationBarWidget(
         selectedIndex: _page,
-        backgroundColor: Colors.orange.shade700,
-        navigationBarButtons: icons,
+        items: icons,
         onTabChange: (idx) {
           onPageChanged(idx);
         },
