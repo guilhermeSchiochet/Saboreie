@@ -1,17 +1,16 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:saboreie/src/data/model/button_navigation_bar.model.dart';
 
 class CustomNavigationBarWidget extends StatelessWidget {
   final int selectedIndex;
-  final Color backgroundColor;
+  final Color? activeColor;
   final void Function(int) onTabChange;
-  final List<ButtonNavigationBarModel> navigationBarButtons;
+  final List<ButtonNavigationBarModel> items;
 
   const CustomNavigationBarWidget({
     required this.onTabChange,
-    required this.backgroundColor,
-    required this.navigationBarButtons,
+    this.activeColor,
+    required this.items,
     this.selectedIndex = 0,
     super.key,
   });
@@ -19,31 +18,33 @@ class CustomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+              BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset: const Offset(0, 4),
+              blurRadius: 10,
+              spreadRadius: 2,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(6),
-              child: Row(
-                children: List.generate(navigationBarButtons.length, (index) {
-                  final button = navigationBarButtons[index];
-                  return _Button(
-                    index: index,
-                    backgroundColor: backgroundColor,
-                    active: selectedIndex == index,
-                    text: button.titile,
-                    icon: button.icon,
-                    onTap: () => onTabChange(index),
-                  );
-                }),
-              ),
-            ),
+          ]
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(items.length, (index) {
+              final item = items[index];
+              return _NavItem(
+                index: index,
+                active: selectedIndex == index,
+                text: item.title,
+                icon: item.icon,
+                activeColor: activeColor ?? Colors.grey.shade600,
+                onTap: () => onTabChange(index),
+              );
+            }),
           ),
         ),
       ),
@@ -51,87 +52,73 @@ class CustomNavigationBarWidget extends StatelessWidget {
   }
 }
 
-class _Button extends StatelessWidget {
+class _NavItem extends StatelessWidget {
   final int index;
   final bool active;
   final String text;
   final IconData icon;
   final VoidCallback onTap;
-  final Color backgroundColor;
+  final Color activeColor;
 
-  const _Button({
+  const _NavItem({
     required this.index,
     required this.active,
     required this.text,
     required this.icon,
     required this.onTap,
-    required this.backgroundColor,
+    required this.activeColor,
   });
-
-  static const _animationDuration = Duration(milliseconds: 300);
 
   @override
   Widget build(BuildContext context) {
-    final showText = active && text.isNotEmpty;
-
-    return TweenAnimationBuilder<int>(
-      duration: _animationDuration,
-      tween: IntTween(begin: active ? 60 : 160, end: active ? 160 : 60),
-      builder: (context, flex, child) {
-        return Flexible(flex: flex, child: child!);
-      },
-      child: GestureDetector(
-        onTap: onTap,
-        child: TweenAnimationBuilder<Color?>(
-          duration: _animationDuration,
-          tween: ColorTween(end: active ? backgroundColor.withOpacity(0.4) : Colors.transparent),
-          builder: (context, color, child) {
-            return DecoratedBox(
+    return GestureDetector(
+      onTap: onTap,
+      child: TweenAnimationBuilder<double>(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        tween: Tween<double>(begin: 1.0, end: active ? 1.15 : 1.0),
+        builder: (context, scale, child) {
+          return Transform.scale(
+            scale: scale,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
+                color: active ? activeColor.withOpacity(0.2) : Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
-                color: color,
               ),
-              child: child!,
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-            child: SizedBox(
-              height: 35, // Limitação da altura do botão
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (showText) const SizedBox(width: 5),
-                  Flexible(
-                    child: TweenAnimationBuilder<Color?>(
-                      duration: _animationDuration,
-                      tween: ColorTween(end: active ? backgroundColor : Colors.grey.shade400),
-                      builder: (context, iconColor, _) {
-                        return Icon(icon, size: 24, color: iconColor);
-                      },
+                  TweenAnimationBuilder<Color?>(
+                    duration: const Duration(milliseconds: 200),
+                    tween: ColorTween(
+                      begin: Colors.black54,
+                      end: active ? activeColor : Colors.black54,
                     ),
+                    builder: (context, color, _) {
+                      return Icon(
+                        icon,
+                        size: 20,
+                        color: color,
+                      );
+                    },
                   ),
-                  if (showText)
-                    ...[
-                      const SizedBox(width: 5),
-                      Expanded(
-                        child: Text(
-                          text,
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: backgroundColor,
-                          ),
-                        ),
-                      ),
-                    ],
+                  if(active) ...[
+                    const SizedBox(width: 6),
+                    Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: activeColor,
+                      )
+                    )
+                  ]
                 ],
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
