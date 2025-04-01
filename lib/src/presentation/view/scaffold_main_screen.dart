@@ -50,13 +50,7 @@ class _ScaffoldMainScreenState extends State<ScaffoldMainScreen> {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: List.generate(3, (index) => Padding(
-          padding: const EdgeInsets.only(
-            top: 10,
-            left: 10,
-          ),
-          child: pages[index],
-        )),
+        children: List.generate(3, (index) =>  pages[index]),
       ),
       bottomNavigationBar: CustomNavigationBarWidget(
         selectedIndex: _page,
@@ -77,6 +71,8 @@ class _ScaffoldMainScreenState extends State<ScaffoldMainScreen> {
   void onPageChanged(int page) {
     setState(() {
       _page = page;
+
+      _pageController.jumpToPage(page);
     });
   }
 }
