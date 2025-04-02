@@ -18,8 +18,9 @@ dependencies:
       path: gateway
       ref: develop
   hooks_riverpod: ^2.5.2
-  riverpod: ^2.5.1
   lucide_icons: ^0.257.0
+  settings_ui: ^2.0.2
+  riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_lints: ^4.0.0
@@ -30,7 +31,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/imgs/
+    - assets/
 
   fonts:
     - family: Poppins
