@@ -12,7 +12,6 @@ class SlideItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2.6,
       width: MediaQuery.of(context).size.width / 1.2,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
