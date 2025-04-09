@@ -22,7 +22,7 @@ class CustomNavigationBarWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
-              BoxShadow(
+            BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               offset: const Offset(0, 4),
               blurRadius: 10,
@@ -36,6 +36,7 @@ class CustomNavigationBarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(items.length, (index) {
               final item = items[index];
+
               return _NavItem(
                 index: index,
                 active: selectedIndex == index,
