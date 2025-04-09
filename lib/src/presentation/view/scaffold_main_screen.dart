@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:saboreie/src/config/theme/app_theme.dart';
 import 'package:saboreie/src/data/model/button_navigation_bar.model.dart';
 
 import 'package:saboreie/src/presentation/view/home_page.view.dart';
@@ -55,6 +56,7 @@ class _ScaffoldMainScreenState extends State<ScaffoldMainScreen> {
       bottomNavigationBar: CustomNavigationBarWidget(
         selectedIndex: _page,
         items: icons,
+        activeColor: AppTheme.defaultLightColor,
         onTabChange: (idx) {
           onPageChanged(idx);
         },
