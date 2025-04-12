@@ -1,7 +1,8 @@
 import 'package:saboreie/src/config/exports.dart';
 
 abstract class AppTheme {
-  static const Color defaultLightColor = Color.fromARGB(255, 201, 119, 13);
+  static const Color defaultLightColor = Color.fromARGB(255, 255, 10, 10);
+  
   static const String _defaultFontFamily = 'Poppins';
 
   static ThemeData get light {
@@ -13,13 +14,11 @@ abstract class AppTheme {
           fontFamily: _defaultFontFamily,
           fontWeight: FontWeight.bold,
           fontSize: 32,
-          color: defaultLightColor,
         ),
         bodyMedium: TextStyle(
           fontFamily: _defaultFontFamily,
           fontWeight: FontWeight.normal,
           fontSize: 16,
-          color: defaultLightColor,
         ),
       ),
       scrollbarTheme: ScrollbarThemeData(
